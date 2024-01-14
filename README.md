@@ -1,4 +1,3 @@
-Certainly! You can add the following steps to your README file in your GitHub repository to guide users on setting up and running your project:
 
 ```markdown
 # ChatFreeGPT
