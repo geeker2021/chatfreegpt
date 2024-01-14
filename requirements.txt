@@ -2,4 +2,4 @@ spacy
 pywhatkit
 BeautifulSoup4
 wikipedia
-spellchecker
+pyspellchecker
