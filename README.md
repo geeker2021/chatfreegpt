@@ -1,6 +1,5 @@
 
-```markdown
-# ChatFreeGPT
+#chatfreegpt
 
 ## Getting Started
 
