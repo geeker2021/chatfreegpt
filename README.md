@@ -1,4 +1,3 @@
-##chatfreegpt
 
 ## Getting Started
 
