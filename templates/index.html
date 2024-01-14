@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stk.css') }}">
+    <style>
+        /* Style for the user and bot messages */
+        .user-message, .bot-message {
+            max-width: 80%;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            position: relative; /* Enable positioning */
+            word-wrap: break-word; /* Wrap long words to the next line */
+        }
+
+        /* Style for the GPT icon within the bot messages */
+        .bot-message .gpt-icon {
+            width: 24px;  /* Adjust the width of the icon */
+            height: 24px; /* Adjust the height of the icon */
+            margin-right: 8px; /* Add some right margin for spacing */
+            border-radius: 50%; /* Make the icon circular */
+            position: absolute; /* Position the icon absolutely within the bot message */
+            top: 50%; /* Center the icon vertically */
+            transform: translateY(-50%); /* Adjust for vertical centering */
+        }
+
+        /* Adjust the icon position based on message length */
+        .bot-message.short-message .gpt-icon {
+            left: calc(100% + 10px); /* Position to the right for short messages */
+        }
+
+        .bot-message.long-message .gpt-icon {
+            left: -32px; /* Position to the left for long messages */
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">Chat with Assistant</div>
+        <div class="chat-messages" id="chat">
+            <!-- Chat messages will be added here dynamically -->
+        </div>
+        <!-- Replace the button element with an icon -->
+        <div class="chat-input-container">
+            <input type="text" id="user_input" placeholder="Type a message...">
+            <!-- Use a span for the send icon within the button -->
+            <button id="send_button" onclick="sendMessage()">
+                <span id="send_icon">➤</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var user_input = document.getElementById("user_input").value;
+
+            // Add user message to the chat
+            var user_message = document.createElement("li");
+            user_message.className = "user-message";
+
+            // Append the user input text
+            user_message.appendChild(document.createTextNode("You: " + user_input));
+
+            // Append the user_message to the chat container
+            document.getElementById("chat").appendChild(user_message);
+
+            // Clear the input field
+            document.getElementById("user_input").value = "";
+
+            // Make an AJAX request to the server to get the bot's response
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/chat", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var bot_response = xhr.responseText;
+
+                    // Add bot message to the chat
+                    var bot_message = document.createElement("li");
+                    bot_message.className = "bot-message";
+
+                    // Append the bot response text
+                    bot_message.appendChild(document.createTextNode(bot_response));
+
+                    // Append the bot_message to the chat container
+                    document.getElementById("chat").appendChild(bot_message);
+
+                    // Scroll to the bottom of the chat
+                    scrollChatToBottom();
+                }
+            };
+            xhr.send("user_input=" + encodeURIComponent(user_input));
+        }
+
+        function sendMessageOnEnter(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent the default behavior of the Enter key (e.g., new line)
+                sendMessage();
+            }
+        }
+
+        function scrollChatToBottom() {
+            var chatContainer = document.getElementById("chat");
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Attach the function to the keypress event of the input field
+        document.getElementById("user_input").addEventListener("keypress", sendMessageOnEnter);
+    </script>
+</body>
+</html>

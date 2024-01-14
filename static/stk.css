@@ -1,0 +1,202 @@
+body, h1, h2, p, ul, li, input, button {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('bck.jpg');
+    background-size: cover;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 30%;
+    height: 90vh;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background-color: #3f729b;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: large;
+    border-bottom: 2px solid #336699;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: scroll;
+    list-style-type: none;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-message, .bot-message {
+    max-width: 80%;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    animation: popUp 0.5s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added shadow effect */
+}
+
+.user-message {
+    background-color: #dbf2d9;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background-color: #e0e0e0;
+    align-self: flex-start;
+}
+
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-top: 2px solid #336699;
+    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.1); /* Added shadow effect */
+}
+
+#user_input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#send_button {
+    background-color: #336699;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease; /* Added transition effect */
+}
+
+#send_button:hover {
+    background-color: #265982; /* Darker shade on hover */
+}
+
+#send_icon {
+    margin-right: 5px;
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+/* Add or update the following styles in your CSS */
+
+/* Style for the bot messages */
+/* Style for the bot messages */
+.bot-message {
+    max-width: 80%;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    position: relative; /* Enable positioning */
+}
+
+/* Style for the GPT icon within the bot messages */
+.bot-message .gpt-icon {
+    width: 24px;  /* Adjust the width of the icon */
+    height: 24px; /* Adjust the height of the icon */
+    margin-left: 400px; /* Add some left margin for spacing */
+    border-radius: 50%; /* Make the icon circular */
+    position: absolute;
+    right: 10px; /* Adjust the distance to the right */
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
+/* Adjust the icon position for long messages */
+.bot-message.long-message .gpt-icon {
+    right: calc(100% + 10px); /* Adjust the distance for long messages */
+}
+
+
+
+
+
+
+/* Style for the user messages */
+.user-message {
+    max-width: 80%;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    position: relative; /* Enable positioning */
+}
+
+/* Style for the user input icon within the user messages */
+.user-message .user-icon {
+    width: 24px;  /* Adjust the width of the icon */
+    height: 24px; /* Adjust the height of the icon */
+    margin-right: 8px; /* Add some right margin for spacing */
+    border-radius: 50%; /* Make the icon circular */
+}
+
+/* Style for the GPT icon within the bot messages */
+.bot-message .gpt-icon {
+    width: 24px;  /* Adjust the width of the icon */
+    height: 24px; /* Adjust the height of the icon */
+    margin-right: 8px; /* Add some right margin for spacing */
+    border-radius: 50%; /* Make the icon circular */
+}
+
+/* Adjust the icon position based on message length */
+.bot-message .gpt-icon.long-message {
+    left: calc(100% + 10px); /* Adjust the distance for long messages */
+}
+
+/* Style for the chat input container */
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Style for the send button */
+#send_button {
+    background-color: #036779;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Style for the send icon within the button */
+#send_icon {
+    margin-right: 5px;
+}

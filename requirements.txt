@@ -1,0 +1,6 @@
+spacy
+sys
+pywhatkit
+BeautifulSoup4
+wikipedia
+spellchecker
