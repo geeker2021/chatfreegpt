@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI chat</title>
+    <title>Chat Free GPT</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='stk.css') }}">
 </head>
 <body>
     <div class="chat-container">
         <div class="chat-header">Chat with Assistant</div>
         <div class="chat-messages" id="chat">
+            <div class="welcome-message" id="welcomeMessage">
+                Welcome to Chat Free GPT! Start typing to chat with the assistant.
+            </div>
         </div>
         <div class="chat-input-container">
             <input type="text" id="user_input" placeholder="Type a message...">
@@ -19,6 +22,53 @@
         </div>
     </div>
 
-    <script src="scripts\script.js" defer></script>   
+    <script>
+        function sendMessage() {
+            var user_input = document.getElementById("user_input").value;
+
+            // Add user message to the chat
+            var user_message = document.createElement("li");
+            user_message.className = "user-message";
+            user_message.appendChild(document.createTextNode("👤"+user_input));
+            document.getElementById("chat").appendChild(user_message);
+
+            // Clear the input field
+            document.getElementById("user_input").value = "";
+
+            // Make an AJAX request to the server to get the bot's response
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/chat", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var bot_response = xhr.responseText;
+
+                    // Add bot message to the chat
+                    var bot_message = document.createElement("li");
+                    bot_message.className = "bot-message";
+                    bot_message.appendChild(document.createTextNode("🤖"+bot_response));
+                    document.getElementById("chat").appendChild(bot_message);
+
+                    // Scroll to the bottom of the chat
+                    scrollChatToBottom();
+                }
+            };
+            xhr.send("user_input=" + encodeURIComponent(user_input));
+        }
+
+        function sendMessageOnEnter(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function scrollChatToBottom() {
+            var chatContainer = document.getElementById("chat");
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        document.getElementById("user_input").addEventListener("keypress", sendMessageOnEnter);
+    </script>   
 </body>
 </html>
