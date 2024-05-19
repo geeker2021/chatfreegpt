@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>🤖 Chat Free GPT</title>
+        <link rel="icon" type="image/x-icon" href="favi.ico">
         <link rel="stylesheet" href="{{ url_for('static', filename='stk.css') }}">
-        <link rel="icon" href="path/to/your/icon.png" type="image/png"> <!-- Replace "path/to/your/icon.png" with the actual path to your icon file -->
+        
     </head>
     
 <body>
@@ -31,7 +32,7 @@
             // Add user message to the chat
             var user_message = document.createElement("li");
             user_message.className = "user-message";
-            user_message.appendChild(document.createTextNode("👤"+user_input));
+            user_message.appendChild(document.createTextNode(""+user_input));
             document.getElementById("chat").appendChild(user_message);
 
             // Clear the input field
